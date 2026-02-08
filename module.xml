@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="demo-coffeemaker.ZPM">
+  <Document name="iris-budget  .ZPM">
     <Module>
-      <Name>demo-coffeemaker</Name>
-      <Version>1.0.2</Version>
+      <Name>iris-budget</Name>
+      <Version>0.0.1</Version>
       <Description>InterSystems IRIS Full-stack app demo</Description>
-      <Keywords>REST,Full-stack,angular</Keywords>
+      <Keywords>Full-stack</Keywords>
       <Packaging>module</Packaging>
       <CSPApplication CookiePath="/csp/coffee/" DefaultTimeout="900" DeployPath="${cspdir}/coffee" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/web" UnauthenticatedEnabled="0" Url="/csp/coffee" UseSessionCookie="2"/>
       <SourcesRoot>src</SourcesRoot>
