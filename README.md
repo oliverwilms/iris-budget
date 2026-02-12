@@ -15,7 +15,7 @@ Clone the repo, run:
 ```
 docker-compose up -d
 ```
-RUn the application with URL: http://localhost:52773/csp/coffee/index.html#/
+Run the application with URL: http://localhost:52773/csp/coffee/index.html#/
 ### ZPM way
 Open IRIS terminal and run ZPM:
 ```
