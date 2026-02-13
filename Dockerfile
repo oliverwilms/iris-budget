@@ -15,7 +15,7 @@ USER ${ISC_PACKAGE_MGRUSER}
 
 ARG TESTS=0
 ARG MODULE="iris-budget"
-ARG NAMESPACE="COFFEE"
+ARG NAMESPACE="IRISAPP"
 
 RUN --mount=type=bind,src=.,dst=. \
     iris start IRIS && \
