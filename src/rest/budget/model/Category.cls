@@ -25,15 +25,6 @@ ClassMethod CheckPermission(pID As %String, pOperation As %String, pUserContext 
 
 XData ActionMap [ XMLNamespace = "http://www.intersystems.com/_pkg/isc/rest/action" ]
 {
-<actions xmlns="http://www.intersystems.com/_pkg/isc/rest/action">
-<action name="add-phone" target="instance" method="POST" call="AddPhoneNumber">
-<argument name="phoneNumber" target="phoneNumber" source="body" />
-</action>
-
-<action name="find-by-phone" target="class" method="GET" query="FindByPhone">
-<argument name="phoneFragment" target="phoneFragment" source="query" />
-</action>
-</actions>
 }
 
 }
