@@ -15,7 +15,7 @@ intersystems-irispython==5.2.1
 jinja2==3.1.6
 jsonschema==4.25.1
 jsonschema-specifications==2025.9.1
-logging==0.4.9.6
+# logging==0.4.9.6
 markupsafe==3.0.3
 narwhals==2.6.0
 numpy==2.3.3
