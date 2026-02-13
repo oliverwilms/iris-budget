@@ -14,7 +14,7 @@ RUN apt update && apt-get -y install git
 USER ${ISC_PACKAGE_MGRUSER}
 
 ARG TESTS=0
-ARG MODULE="demo-coffeemaker"
+ARG MODULE="iris-budget"
 ARG NAMESPACE="COFFEE"
 
 RUN --mount=type=bind,src=.,dst=. \
