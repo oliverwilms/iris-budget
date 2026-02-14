@@ -15,7 +15,7 @@ Clone the repo, run:
 ```
 docker-compose up -d
 ```
-Run the application with URL: http://localhost:52773/csp/coffee/index.html#/
+Run the application with URL: http://localhost:52773/csp/IRISAPP/index.html#/
 ### ZPM way
 Open IRIS terminal and run ZPM:
 ```
@@ -52,14 +52,14 @@ THere is a [Github Actions CI workflow](https://github.com/intersystems-communit
 
 But you also can run the test script locally with:
 ```
-COFFEE>set ^UnitTestRoot="/irisdev/app/tests"
-COFFEE>do ##class(%UnitTest.Manager).RunTest()
+IRISAPP>set ^UnitTestRoot="/irisdev/app/tests"
+IRISAPP>do ##class(%UnitTest.Manager).RunTest()
 ```
 Or with ZPM:
 ```
-COFFEE>zpm
-zpm:COFFEE>load /irisdev/app
-zpm:COFFEE>test demo-coffeemaker
+IRISAPP>zpm
+zpm:IRISAPP>load /irisdev/app
+zpm:IRISAPP>test demo-coffeemaker
 ```
 
 ## ZPM Package Manager
