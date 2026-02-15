@@ -1,4 +1,4 @@
-Class UnitTest.rest.budget Extends %UnitTest.TestCase
+Class UnitTest.rest.budget Extends (%UnitTest.TestCase, rest.client)
 {
 
 ClassMethod GetPayload(pUseCase = 0) As %DynamicAbstractObject
@@ -42,7 +42,7 @@ Method SendRequest(pUseCase As %String = "", pIris As %String = "", pKill = 0, p
 	Do ..LogMessage(x)
 	Set dynObj = ..GetPayload(pUseCase)
 	Do ..LogMessage("Payload: "_dynObj.%ToJSON())
-	Set tSC = ##class(rest.client).CallRESTapi(pIris,pUrl,.pResponseData,pType,dynObj)
+	Set tSC = ..CallRESTapi(pIris,pUrl,.pResponseData,pType,dynObj)
 	zw pResponseData
 	;
 	Set tSC = pResponseData.Rewind()
