@@ -11,6 +11,7 @@
       <SourcesRoot>src</SourcesRoot>
       <Resource Directory="cls" Name="Demo.PKG"/>
       <Resource Name="Demo.coffeemakerD.GBL"/>
+      <Resource Directory="cls" Name="rest.PKG"/>
       <CSPApplication CookiePath="/csp/budget/" DefaultTimeout="900" DispatchClass="budget.disp" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/csp/budget" UseSessionCookie="2"/>
       <CSPApplication CookiePath="/rest/budget/" DefaultTimeout="900" DispatchClass="rest.budget.rest.Handler" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/rest/budget" Generated="true"/>
       <CSPApplication CookiePath="/rest/coffeemakerapp/" DefaultTimeout="900" DispatchClass="Demo.CoffeeMakerRESTServer" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/rest/coffeemakerapp" UseSessionCookie="2"/>
