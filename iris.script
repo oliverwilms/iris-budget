@@ -7,11 +7,11 @@
     set sc = ##class(App.Installer).setup() 
 
     zn "IRISAPP"
-    Set file="/irisdev/app/swagger/budget.json"
-    ;Set obj = ##class(%DynamicAbstractObject).%FromJSONFile(file)
-    ;Do ##class(%REST.API).CreateApplication("budget",.obj,,.new,.error)
+    Set file="/home/irisowner/irisbuild/swagger/budget.json"
+    Set obj = ##class(%DynamicAbstractObject).%FromJSONFile(file)
+    Do ##class(%REST.API).CreateApplication("budget",.obj,,.new,.error)
 
-    Do $System.OBJ.Load("/irisdev/app/src/cls/rest/client.cls","ck")
+    Do $System.OBJ.Load("/home/irisowner/irisbuild/src/cls/rest/client.cls","ck")
 
     // load all the code of the project as a ZPM package
     zn "IRISAPP"
