@@ -1,6 +1,19 @@
 Class UnitTest.rest.budget Extends %UnitTest.TestCase
 {
 
+ClassMethod GetPayload(pUseCase = 0) As %DynamicAbstractObject
+{
+  Set dao = {}  // Use Datamaker here
+  Quit dao
+}
+
+ClassMethod GetUrl(pUseCase, ByRef pType As %String, ByRef pUrl As %String) As %Status
+{
+  Set pType = "POST"
+  Set pUrl = "/"
+  Quit $$$OK
+}
+
 ClassMethod Run()
 {
   do ##class(%UnitTest.Manager).DebugRunTestCase(..%ClassName(1))
@@ -18,15 +31,55 @@ Method OnAfterOneTest(testname As %String) As %Status
   Quit $$$OK
 }
 
-Method "Test Required fields"()
+Method SendRequest(pUseCase As %String = "", pIris As %String = "", pKill = 0, pStatusCode = "", pErrorCode = "", pExpect = "") As %Status
 {
-  Set category = ##class(dc.iris.category).%New()
-  Do $$$AssertStatusNotOK(category.%Save(), "Shouldn't save, due to empty required fields")
+	If $Get(pKill) Kill ^TESTunit
+	Do ..DebugTEST("UnitTest.rest.budget - SendRequest")
+	Set tSC = $$$OK
+	Set pIris = ""
+	Set tSC = ..GetUrl(pUseCase,.pType,.pUrl)
+	Set x = pType_" "_$Replace(pIris,":443","")_pUrl
+	Do ..LogMessage(x)
+	Set dynObj = ..GetPayload(pUseCase)
+	Do ..LogMessage("Payload: "_dynObj.%ToJSON())
+	Set tSC = ##class(rest.client).CallRESTapi(pIris,pUrl,.pResponseData,pType,dynObj)
+	zw pResponseData
+	;
+	Set tSC = pResponseData.Rewind()
+	Set tStringResponse = pResponseData.Read()
+	Do ..LogMessage("Actual response: "_tStringResponse)
+	;
+	Set dynObj = ##class(%DynamicAbstractObject).%FromJSON(tStringResponse)
+	Set tStatusCode = ""
+	Set x = "Test Use Case "_pUseCase_" overall response status code "_tStatusCode_" matches expected value "_pStatusCode
+	Do $$$AssertEquals(tStatusCode, pStatusCode, x)
+	Set tErrorsCount = 0
+	Set tMatchError = 0
+  Set tResult = ""
+	If ("" = pErrorCode) {
+		Set tMatch = (0 = tErrorsCount)
+		Set tResult = "No errors"
+	}
+	If pErrorCode {
+		Set tMatch = (tMatchError > 0)
+		Set tResult = ""
+	}
+	Do $$$AssertEquals(tMatch, 1, "Expected Results: "_tResult)
+	Quit $$$OK
+}
 
-  #; Fill Required fields
-  Set category.IncomeOrExpense = ##class(%PopulateUtils).String()
-  Set category.Name = ##class(%PopulateUtils).String()
-  Do $$$AssertStatusOK(category.%Save(), "Should save correctly, due to filled required fields")
+Method Test0PostCategory() As %Status
+{
+	Set pExpect = "{"
+	Do ..LogMessage("Expected response: "_pExpect)
+	Set pError = 0
+	Set pIris = ..GetIris()
+  Set pUrl = "/"
+	Set pKill = 1
+  Set pStatusCode = ""
+  Set pErrorCode = ""
+  Do ..SendRequest(pUrl, pIris, pKill, pStatusCode, pErrorCode, pExpect)
+	Quit $$$OK
 }
 
 }
