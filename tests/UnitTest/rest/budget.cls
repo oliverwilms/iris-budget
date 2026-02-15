@@ -46,7 +46,6 @@ Method SendRequest(pUseCase As %String = "", pIris As %String = "", pKill = 0, p
 	If $Get(pKill) Kill ^TESTunit
 	Do ..DebugTEST("UnitTest.rest.budget - SendRequest")
 	Set tSC = $$$OK
-	Set pIris = ""
 	Set tSC = ..GetUrl(pUseCase,.pType,.pUrl)
 	Set x = pType_" "_$Replace(pIris,":443","")_pUrl
 	Do ..LogMessage(x)
