@@ -1,4 +1,4 @@
-Class rest.client  
+Class rest.client
 {
 
 ClassMethod CallRESTapi(pIris As %String, pUrl As %String, ByRef pResponseData As %DynamicObject, pType As %String = "GET", pBody = "") As %Status
@@ -47,7 +47,7 @@ ClassMethod CallRESTapi(pIris As %String, pUrl As %String, ByRef pResponseData A
 			//Supported schemes are Negotiate, NTLM and Basic.
 			Set tRequest.InitiateAuthentication = "Basic"
 			Set tRequest.Username = "_SYSTEM"
-			Set tRequest.Password = ##class(Oliver.JWT).getPass()  // ..GetPass(pIris)
+			Set tRequest.Password = "SYS"
 		} Catch {
 		}
 		Set tRequest.Port = tPort
