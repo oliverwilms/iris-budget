@@ -31,7 +31,11 @@ ClassMethod categoryCreate(categoryInfo As %Stream.Object) As %Stream.Object
         Set pType = dao."IncomeOrExpense"
         Set pName = dao."Name"
         Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
-    } Catch ex {}
+        Set ^TESTunit(0-debug,"tSC") = "OK"
+        If $$$ISERR(tSC) Set ^TESTunit(0-debug,"tSC") = $System.Status.GetErrorText(tSC)
+    } Catch ex {
+        Set ^TESTunit(0-debug,"ex") = $ZERROR
+    }
     //Do ..%SetStatusCode(<HTTP_status_code>)
     //Do ..%SetHeader(<name>,<value>)
     //Quit (Place response here) ; response may be a string, stream or dynamic object
