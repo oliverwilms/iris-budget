@@ -10,7 +10,7 @@
       <CSPApplication CookiePath="/csp/coffee/" DefaultTimeout="900" DeployPath="${cspdir}/coffee" MatchRoles=":${dbrole}" PasswordAuthEnabled="0" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" SourcePath="/web" UnauthenticatedEnabled="0" Url="/csp/coffee" UseSessionCookie="2"/>
       <Dependencies>
         <ModuleReference>
-          <Name>isc.rest</Name>
+          <Name>isc-rest</Name>
           <Version>^2.0.0</Version>
         </ModuleReference>
       </Dependencies>
