@@ -83,11 +83,11 @@ Method Test0PostCategory() As %Status
 	Do ..LogMessage("Expected response: "_pExpect)
 	Set pError = 0
 	Set pIris = ..GetIris()
-  Set pUrl = "/"
+	Set pUrl = "/csp/budget/category"
 	Set pKill = 1
-  Set pStatusCode = ""
-  Set pErrorCode = ""
-  Do ..SendRequest(pUrl, pIris, pKill, pStatusCode, pErrorCode, pExpect)
+	Set pStatusCode = ""
+	Set pErrorCode = ""
+	Do ..SendRequest(pUrl, pIris, pKill, pStatusCode, pErrorCode, pExpect)
 	Quit $$$OK
 }
 
