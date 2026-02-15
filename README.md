@@ -63,10 +63,8 @@ zpm:IRISAPP>test demo-coffeemaker
 ```
 
 ## ZPM Package Manager
-This module is zpm-packaged, which means that it is described with [module.xml](https://github.com/intersystems-community/iris-fullstack-template/blob/40d39a688df604ef11681c80fc24254a6570fe43/module.xml) and available in public repository and installable with:
-zpm "install demo-coffeemaker"
-Feel free to use as an example and change the module.xml to package your own InterSystems IRIS full-stack solution.
-
+This module is zpm-packaged, which means that it is described with [module.xml](https://github.com/oliverwilms/iris-budget/blob/master/module.xml) and available in public repository and installable with:
+zpm "install iris-budget"
 
 ## Credits
 Demo is built using original [Coffee Maker application](https://github.com/intersystems/FirstLook-REST) by Michael Smart a and it's enhanced version by [Caret Dev](https://github.com/caretdev/CoffeeMaker).
