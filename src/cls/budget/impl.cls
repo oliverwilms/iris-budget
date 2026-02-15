@@ -23,7 +23,12 @@ ClassMethod categoryGetById(categoryId As %Integer) As %Stream.Object
 ///     categoryInfo<br/>
 ClassMethod categoryCreate(categoryInfo As %Stream.Object) As %Stream.Object
 {
-    //(Place business logic here)
+    Try {
+        Set dao = ##class(%DynamicAbstractObject).%FromJSON(categoryInfo)
+        Set pType = dao."type"
+        Set pName = dao."name"
+        Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
+    } Catch ex {}
     //Do ..%SetStatusCode(<HTTP_status_code>)
     //Do ..%SetHeader(<name>,<value>)
     //Quit (Place response here) ; response may be a string, stream or dynamic object
