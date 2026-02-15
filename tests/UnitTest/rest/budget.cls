@@ -18,7 +18,7 @@ ClassMethod GetPayload(pUseCase = 0) As %DynamicAbstractObject
 ClassMethod GetUrl(pUseCase, ByRef pType As %String, ByRef pUrl As %String) As %Status
 {
   Set pType = "POST"
-  Set pUrl = "/"
+  Set pUrl = "/csp/budget/category"
   Quit $$$OK
 }
 
@@ -83,11 +83,11 @@ Method Test0PostCategory() As %Status
 	Do ..LogMessage("Expected response: "_pExpect)
 	Set pError = 0
 	Set pIris = ..GetIris()
-	Set pUrl = "/csp/budget/category"
+	Set p1 = ""
 	Set pKill = 1
 	Set pStatusCode = ""
 	Set pErrorCode = ""
-	Do ..SendRequest(pUrl, pIris, pKill, pStatusCode, pErrorCode, pExpect)
+	Do ..SendRequest(p1, pIris, pKill, pStatusCode, pErrorCode, pExpect)
 	Quit $$$OK
 }
 
