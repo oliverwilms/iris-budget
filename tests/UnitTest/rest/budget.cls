@@ -1,6 +1,8 @@
 Class UnitTest.rest.budget Extends (%UnitTest.TestCase, rest.client)
 {
 
+Parameter TRANSACTION = 0;
+
 ClassMethod GetIris() As %String
 {
 	Set tIris = "127.0.0.1:52773"
@@ -27,12 +29,14 @@ ClassMethod Run()
 
 Method OnBeforeOneTest(testname As %String) As %Status
 {
+	If (0 = ..#TRANSACTION) { Quit $$$OK }
   TStart 
   Quit $$$OK
 }
 
 Method OnAfterOneTest(testname As %String) As %Status
 {
+	If (0 = ..#TRANSACTION) { Quit $$$OK }
   TROllback 
   Quit $$$OK
 }
