@@ -12,6 +12,8 @@ ClassMethod GetIris() As %String
 ClassMethod GetPayload(pUseCase = 0) As %DynamicAbstractObject
 {
   Set dao = {}  // Use Datamaker here
+  Set dao."IncomeOrExpense" = "Income"
+  Set dao."Name" = "Paycheck"
   Quit dao
 }
 
