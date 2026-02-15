@@ -1,4 +1,0 @@
-sqlalchemy-iris
-streamlit
-pandas
-pygwalker
