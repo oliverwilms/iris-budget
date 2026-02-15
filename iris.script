@@ -11,6 +11,8 @@
     ;Set obj = ##class(%DynamicAbstractObject).%FromJSONFile(file)
     ;Do ##class(%REST.API).CreateApplication("budget",.obj,,.new,.error)
 
+    Do $System.OBJ.Load("/irisdev/app/src/cls/rest/client.cls","ck")
+
     // load all the code of the project as a ZPM package
     zn "IRISAPP"
     zpm "load /home/irisowner/irisbuild/ -v":1:1
