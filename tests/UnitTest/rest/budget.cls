@@ -1,6 +1,12 @@
 Class UnitTest.rest.budget Extends (%UnitTest.TestCase, rest.client)
 {
 
+ClassMethod GetIris() As %String
+{
+	Set tIris = "127.0.0.1:52773"
+	Quit tIris
+}
+
 ClassMethod GetPayload(pUseCase = 0) As %DynamicAbstractObject
 {
   Set dao = {}  // Use Datamaker here
