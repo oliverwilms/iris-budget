@@ -6,6 +6,11 @@
     do $SYSTEM.OBJ.Load("/home/irisowner/irisbuild/Installer.cls", "ck") 
     set sc = ##class(App.Installer).setup() 
 
+    zn "IRISAPP"
+    Set file="/opt/irisbuild/swagger/ccs/ccs.swagger.json"
+    Set obj = ##class(%DynamicAbstractObject).%FromJSONFile(file)
+    Do ##class(%REST.API).CreateApplication("ccs",.obj,,.new,.error)
+
     // load all the code of the project as a ZPM package
     zn "IRISAPP"
     zpm "load /home/irisowner/irisbuild/ -v":1:1
