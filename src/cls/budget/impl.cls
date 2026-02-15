@@ -23,10 +23,13 @@ ClassMethod categoryGetById(categoryId As %Integer) As %Stream.Object
 ///     categoryInfo<br/>
 ClassMethod categoryCreate(categoryInfo As %Stream.Object) As %Stream.Object
 {
+    Set debug = $Increment(^TESTunit)
+	Set ^TESTunit(0-debug) = $Get(categoryInfo)
     Try {
         Set dao = ##class(%DynamicAbstractObject).%FromJSON(categoryInfo)
-        Set pType = dao."type"
-        Set pName = dao."name"
+        Set ^TESTunit(0-debug,"dao") = dao.%ToJSON()
+        Set pType = dao."IncomeOrExpense"
+        Set pName = dao."Name"
         Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
     } Catch ex {}
     //Do ..%SetStatusCode(<HTTP_status_code>)
