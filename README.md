@@ -53,7 +53,7 @@ THere is a [Github Actions CI workflow](https://github.com/intersystems-communit
 But you also can run the test script locally with:
 ```
 IRISAPP>set ^UnitTestRoot="/irisdev/app/tests"
-IRISAPP>do ##class(%UnitTest.Manager).RunTest()
+IRISAPP>do ##class(%UnitTest.Manager).RunTest(,"/nodelete")
 ```
 Or with ZPM:
 ```
