@@ -7,9 +7,9 @@
     set sc = ##class(App.Installer).setup() 
 
     zn "IRISAPP"
-    Set file="/opt/irisbuild/swagger/ccs/ccs.swagger.json"
+    Set file="/irisdev/app/swagger/budget.json"
     Set obj = ##class(%DynamicAbstractObject).%FromJSONFile(file)
-    Do ##class(%REST.API).CreateApplication("ccs",.obj,,.new,.error)
+    Do ##class(%REST.API).CreateApplication("budget",.obj,,.new,.error)
 
     // load all the code of the project as a ZPM package
     zn "IRISAPP"
