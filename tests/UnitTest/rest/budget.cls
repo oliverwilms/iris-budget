@@ -29,6 +29,13 @@ ClassMethod GetPayload(pUseCase = 0) As %DynamicAbstractObject
 
 ClassMethod GetUrl(pUseCase, ByRef pType As %String, ByRef pUrl As %String) As %Status
 {
+  If ("A" = $Extract(pUseCase,1)) {
+	Set tRandom = $Extract(pUseCase,2,*)
+	Set tCategoryType = $Select((0 < tRandom):"Income",1:"Expense")
+	Set pType = "GET"
+	Set pUrl = "/csp/budget/categorylist/"_tCategoryType
+	Quit $$$OK
+  }
   Set pType = "POST"
   Set pUrl = "/csp/budget/category"
   Quit $$$OK
@@ -96,6 +103,21 @@ Method Test0PostCategory() As %Status
 	Set pError = 0
 	Set pIris = ..GetIris()
 	Set p1 = $Random(3) - 1  // -1, 0, 1
+	Set pKill = 1
+	Set pStatusCode = ""
+	Set pErrorCode = ""
+	Do ..SendRequest(p1, pIris, pKill, pStatusCode, pErrorCode, pExpect)
+	Quit $$$OK
+}
+
+Method TestCategorylist() As %Status
+{
+	Set pExpect = "{"
+	Do ..LogMessage("Expected response: "_pExpect)
+	Set pError = 0
+	Set pIris = ..GetIris()
+	Set tRandom = $Random(2)  // 0, 1
+	Set p1 = "A"_tRandom
 	Set pKill = 1
 	Set pStatusCode = ""
 	Set pErrorCode = ""
