@@ -15,6 +15,7 @@ ClassMethod ExecuteQueryOneValue(pQuery As %String, ByRef pResult As %String) As
 	Quit tSC
 }
 
+/// "SELECT ID, Name FROM dc_iris.category WHERE ...
 ClassMethod ExecuteQuerySelect(pQuery As %String, ByRef pResultArray) As %Status
 {
     Try {
@@ -23,10 +24,18 @@ ClassMethod ExecuteQuerySelect(pQuery As %String, ByRef pResultArray) As %Status
         If $$$ISERR(status) {write "%Prepare failed:" do $SYSTEM.Status.DisplayError(status) quit}
         Set rset = statement.%Execute()
         If (rset.%SQLCODE '= 0) {write "%Execute failed:", !, "SQLCODE ", rset.%SQLCODE, ": ", rset.%Message quit}
+        ;
+        Set x = $Piece(pQuery,"SELECT ",2)
+        Set columns = $Piece(x," FROM",1)
+        For index = 1:1:$Length(columns,", ") {
+            Set col(index) = $Piece(columns,", ",index)
+        }
+        ;
         While rset.%Next() {
             Write "Row count ",rset.%ROWCOUNT,!
             Write rset.ID
-            Write ", Href ",rset.Href,!!
+            Set index = 2
+            Write col(index),rset.%GetData(index),!!
         }
         If (rset.%SQLCODE < 0) {write "%Next failed:", !, "SQLCODE ", rset.%SQLCODE, ": ", rset.%Message quit}
         Write !,"End of data"
