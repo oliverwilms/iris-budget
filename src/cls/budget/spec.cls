@@ -1,0 +1,148 @@
+Class budget.spec Extends %REST.Spec [ ProcedureBlock ]
+{
+
+XData OpenAPI [ MimeType = application/json ]
+{
+{
+  "swagger":"2.0",
+  "info":{
+    "version":"1.0.0",
+    "title":"iris-budget",
+    "description":"This API lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  "basePath":"/budget/API/v1",
+  "schemes":[
+    "http"
+  ],
+  "paths":{
+    "/category/{categoryId}":{
+      "get":{
+        "tags":[
+          "category"
+        ],
+        "operationId":"categoryGetById",
+        "description":"Get category details by category ID",
+        "summary":"Get category information",
+        "parameters":[
+          {
+            "name":"categoryId",
+            "in":"path",
+            "required":true,
+            "type":"integer"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/category"
+            }
+          },
+          "400":{
+            "description":"categoryId must be specified."
+          },
+          "404":{
+            "description":"category not found."
+          }
+        }
+      }
+    },
+    "/categorylist/{type}":{
+      "get":{
+        "tags":[
+          "category"
+        ],
+        "operationId":"categoryListByType",
+        "description":"Get category list by type (income or expense)",
+        "summary":"Get category information",
+        "parameters":[
+          {
+            "name":"categoryType",
+            "in":"path",
+            "required":true,
+            "type":"string"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/category"
+            }
+          },
+          "400":{
+            "description":"categoryType must be specified."
+          },
+          "404":{
+            "description":"category type not found."
+          }
+        }
+      }
+    },
+    "/category":{
+      "post":{
+        "tags":[
+          "category"
+        ],
+        "summary":"Create a new category",
+        "description":"Create a new category with the given information.",
+        "operationId":"categoryCreate",
+        "parameters":[
+          {
+            "in":"body",
+            "name":"categoryInfo",
+            "schema":{
+              "$ref":"#/definitions/categoryInfo"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/category"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+    "category":{
+      "type":"object",
+      "required":[
+        "categoryId",
+        "categoryInfo"
+      ],
+      "properties":{
+        "categoryId":{
+          "type":"string",
+          "example":"123"
+        },
+        "categoryInfo":{
+          "$ref":"#/definitions/categoryInfo"
+        }
+      }
+    },
+    "categoryInfo":{
+      "type":"object",
+      "required":[
+        "IncomeOrExpense",
+        "Name"
+      ],
+      "properties":{
+        "IncomeOrExpense":{
+          "type":"string",
+          "example":"Income"
+        },
+        "Name":{
+          "type":"string",
+          "example":"Paycheck"
+        }
+      }
+    }
+  }
+}
+}
+
+}
