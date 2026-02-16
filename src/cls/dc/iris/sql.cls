@@ -32,16 +32,15 @@ ClassMethod ExecuteQuerySelect(pQuery As %String, ByRef pResultArray) As %Status
         }
         ;
         While rset.%Next() {
-            Write "Row count ",rset.%ROWCOUNT,!
-            Write rset.ID
+            Set tRowCount = rset.%ROWCOUNT
+            Set tID = rset.ID
             Set index = 2
-            Write col(index),rset.%GetData(index),!!
+            Set tData = rset.%GetData(index)
+            Set pResultArray(tRowCount) = tData
         }
         If (rset.%SQLCODE < 0) {write "%Next failed:", !, "SQLCODE ", rset.%SQLCODE, ": ", rset.%Message quit}
-        Write !,"End of data"
-        Write !,"Total row count=",rset.%ROWCOUNT
     } Catch ex {}
-    Quit 1
+    Quit $$$OK
 }
 
 }
