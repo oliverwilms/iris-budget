@@ -3,7 +3,7 @@ Class dc.iris.category Extends %Persistent
 
 Parameter DEBUG = 0;
 
-Property Name As %String;
+Property Name As %String [ Required ];
 
 Property Type As %String(VALUELIST = ",Income,Expense");
 
