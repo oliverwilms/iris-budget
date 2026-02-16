@@ -12,6 +12,16 @@ ClassMethod GetIris() As %String
 ClassMethod GetPayload(pUseCase = 0) As %DynamicAbstractObject
 {
   Set dao = {}  // Use Datamaker here
+  If (0 < pUseCase) {
+	Set dao."IncomeOrExpense" = "Income"
+	Set dao."Name" = "Paycheck"
+	Quit dao
+  }
+  If (0 > pUseCase) {
+	Set dao."IncomeOrExpense" = "Expense"
+	Set dao."Name" = "Giving"
+	Quit dao
+  }
   Set dao."IncomeOrExpense" = "Income"
   Set dao."Name" = "Paycheck"
   Quit dao
@@ -85,7 +95,7 @@ Method Test0PostCategory() As %Status
 	Do ..LogMessage("Expected response: "_pExpect)
 	Set pError = 0
 	Set pIris = ..GetIris()
-	Set p1 = ""
+	Set p1 = $Random(3) - 1  // -1, 0, 1
 	Set pKill = 1
 	Set pStatusCode = ""
 	Set pErrorCode = ""
