@@ -42,6 +42,38 @@
         }
       }
     },
+    "/categorylist/{type}":{
+      "get":{
+        "tags":[
+          "category"
+        ],
+        "operationId":"categoryListByType",
+        "description":"Get category list by type (income or expense)",
+        "summary":"Get category information",
+        "parameters":[
+          {
+            "name":"categoryType",
+            "in":"path",
+            "required":true,
+            "type":"string"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/category"
+            }
+          },
+          "400":{
+            "description":"categoryType must be specified."
+          },
+          "404":{
+            "description":"category type not found."
+          }
+        }
+      }
+    },
     "/category":{
       "post":{
         "tags":[
