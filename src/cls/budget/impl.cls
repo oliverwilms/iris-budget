@@ -5,7 +5,7 @@ Class budget.impl Extends %REST.Impl [ ProcedureBlock ]
 {
 
 /// If ExposeServerExceptions is true, then details of internal errors will be exposed.
-Parameter ExposeServerExceptions = 0;
+Parameter ExposeServerExceptions = 1;
 
 /// Get category details by category ID<br/>
 /// The method arguments hold values for:<br/>
@@ -23,6 +23,19 @@ ClassMethod categoryGetById(categoryId As %Integer) As %Stream.Object
 ///     categoryType<br/>
 ClassMethod categoryListByType(categoryType As %String) As %Stream.Object
 {
+    Set debug = $Increment(^TESTunit)
+	Set ^TESTunit(0-debug) = $Get(categoryType)
+    Try {
+        Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
+        Set tHttpStatusCode = 200
+        Set ^TESTunit(0-debug,"tSC") = "OK"
+        If $$$ISERR(tSC) {
+            Set ^TESTunit(0-debug,"tSC") = $System.Status.GetErrorText(tSC)
+        }
+        Do ..%SetStatusCode(tHttpStatusCode)
+    } Catch ex {
+        Set ^TESTunit(0-debug,"ex") = $ZERROR
+    }
     //(Place business logic here)
     //Do ..%SetStatusCode(<HTTP_status_code>)
     //Do ..%SetHeader(<name>,<value>)
@@ -42,15 +55,18 @@ ClassMethod categoryCreate(categoryInfo As %Stream.Object) As %Stream.Object
         Set pType = dao."IncomeOrExpense"
         Set pName = dao."Name"
         Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
+        Set tHttpStatusCode = 200
         Set ^TESTunit(0-debug,"tSC") = "OK"
-        If $$$ISERR(tSC) Set ^TESTunit(0-debug,"tSC") = $System.Status.GetErrorText(tSC)
+        If $$$ISERR(tSC) {
+            Set ^TESTunit(0-debug,"tSC") = $System.Status.GetErrorText(tSC)
+        }
+        Do ..%SetStatusCode(tHttpStatusCode)
     } Catch ex {
         Set ^TESTunit(0-debug,"ex") = $ZERROR
     }
-    //(Place business logic here)
-    //Do ..%SetStatusCode(<HTTP_status_code>)
     //Do ..%SetHeader(<name>,<value>)
     //Quit (Place response here) ; response may be a string, stream or dynamic object
+    Quit "response"
 }
 
 }
