@@ -1,7 +1,7 @@
 Class rest.client
 {
 
-ClassMethod CallRESTapi(pIris As %String, pUrl As %String, ByRef pResponseData As %DynamicObject, pType As %String = "GET", pBody = "") As %Status
+ClassMethod CallRESTapi(pIris As %String, pUrl As %String, ByRef pResponseData As %DynamicObject, pType As %String = "GET", pBody = "", pAuth = 1) As %Status
 {
 	#define maxRESTapiErr 3
 	#define maxRetries 2
@@ -45,6 +45,7 @@ ClassMethod CallRESTapi(pIris As %String, pUrl As %String, ByRef pResponseData A
 		// InitiateAuthentication does not exist in HealthShare versions
 		Try {
 			//Supported schemes are Negotiate, NTLM and Basic.
+			If (0 = pAuth) { Quit }
 			Set tRequest.InitiateAuthentication = "Basic"
 			Set tRequest.Username = "_SYSTEM"
 			Set tRequest.Password = "SYS"
