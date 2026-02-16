@@ -23,23 +23,17 @@ ClassMethod categoryGetById(categoryId As %Integer) As %Stream.Object
 ///     categoryType<br/>
 ClassMethod categoryListByType(categoryType As %String) As %Stream.Object
 {
-    Set debug = $Increment(^TESTunit)
-	Set ^TESTunit(0-debug) = $Get(categoryType)
     Try {
-        Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
+        Set dao = ##class(dc.iris.category).ListByType(categoryType)
         Set tHttpStatusCode = 200
-        Set ^TESTunit(0-debug,"tSC") = "OK"
-        If $$$ISERR(tSC) {
-            Set ^TESTunit(0-debug,"tSC") = $System.Status.GetErrorText(tSC)
-        }
         Do ..%SetStatusCode(tHttpStatusCode)
     } Catch ex {
+        Set debug = $INCREMENT(^TESTunit)
         Set ^TESTunit(0-debug,"ex") = $ZERROR
     }
-    //(Place business logic here)
-    //Do ..%SetStatusCode(<HTTP_status_code>)
     //Do ..%SetHeader(<name>,<value>)
     //Quit (Place response here) ; response may be a string, stream or dynamic object
+    Quit $Get(dao)
 }
 
 /// Create a new category with the given information.<br/>
@@ -66,7 +60,7 @@ ClassMethod categoryCreate(categoryInfo As %Stream.Object) As %Stream.Object
     }
     //Do ..%SetHeader(<name>,<value>)
     //Quit (Place response here) ; response may be a string, stream or dynamic object
-    Quit "response"
+    Quit {}
 }
 
 }
