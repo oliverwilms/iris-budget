@@ -34,6 +34,19 @@ ClassMethod categoryListByType(categoryType As %String) As %Stream.Object
 ///     categoryInfo<br/>
 ClassMethod categoryCreate(categoryInfo As %Stream.Object) As %Stream.Object
 {
+    Set debug = $Increment(^TESTunit)
+	Set ^TESTunit(0-debug) = $Get(categoryInfo)
+    Try {
+        Set dao = ##class(%DynamicAbstractObject).%FromJSON(categoryInfo)
+        Set ^TESTunit(0-debug,"dao") = dao.%ToJSON()
+        Set pType = dao."IncomeOrExpense"
+        Set pName = dao."Name"
+        Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
+        Set ^TESTunit(0-debug,"tSC") = "OK"
+        If $$$ISERR(tSC) Set ^TESTunit(0-debug,"tSC") = $System.Status.GetErrorText(tSC)
+    } Catch ex {
+        Set ^TESTunit(0-debug,"ex") = $ZERROR
+    }
     //(Place business logic here)
     //Do ..%SetStatusCode(<HTTP_status_code>)
     //Do ..%SetHeader(<name>,<value>)
