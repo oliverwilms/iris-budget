@@ -36,6 +36,13 @@ ClassMethod GetUrl(pUseCase, ByRef pType As %String, ByRef pUrl As %String) As %
 	Set pUrl = "/csp/budget/categorylist/"_tCategoryType
 	Quit $$$OK
   }
+  If ("D" = $Extract(pUseCase,1)) {
+	Set tRandom = $Extract(pUseCase,2,*)
+	Set tCategoryType = $Select((0 < tRandom):"Income",1:"Expense")
+	Set pType = "GET"
+	Set pUrl = "/csp/rest/csp/budget/categorylist/"_tCategoryType
+	Quit $$$OK
+  }
   Set pType = "POST"
   Set pUrl = "/csp/budget/category"
   Quit $$$OK
@@ -118,6 +125,21 @@ Method TestCategorylist() As %Status
 	Set pIris = ..GetIris()
 	Set tRandom = $Random(2)  // 0, 1
 	Set p1 = "A"_tRandom
+	Set pKill = 1
+	Set pStatusCode = ""
+	Set pErrorCode = ""
+	Do ..SendRequest(p1, pIris, pKill, pStatusCode, pErrorCode, pExpect)
+	Quit $$$OK
+}
+
+Method TestDispatch() As %Status
+{
+	Set pExpect = "{"
+	Do ..LogMessage("Expected response: "_pExpect)
+	Set pError = 0
+	Set pIris = ..GetIris()
+	Set tRandom = $Random(2)  // 0, 1
+	Set p1 = "D"_tRandom
 	Set pKill = 1
 	Set pStatusCode = ""
 	Set pErrorCode = ""
