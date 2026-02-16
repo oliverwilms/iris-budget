@@ -42,7 +42,7 @@
         }
       }
     },
-    "/categorylist/{type}":{
+    "/categorylist/{categoryType}":{
       "get":{
         "tags":[
           "category"
