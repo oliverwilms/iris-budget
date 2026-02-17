@@ -24,7 +24,7 @@ Method "Test Required fields"()
   Do $$$AssertStatusNotOK(category.%Save(), "Shouldn't save, due to empty required fields")
 
   #; Fill Required fields
-  Set category.IncomeOrExpense = ##class(%PopulateUtils).String()
+  Set category.Type = ##class(%PopulateUtils).String()
   Set category.Name = ##class(%PopulateUtils).String()
   Do $$$AssertStatusOK(category.%Save(), "Should save correctly, due to filled required fields")
 }
