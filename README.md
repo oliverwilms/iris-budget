@@ -68,6 +68,8 @@ I created a classMethod to run tests which I can remember:
 IRISAPP>Do ##class(dc.iris.test).Run()
 ```
 
+Review UnitTest results in URL: http://yourserver:52773/csp/sys/%25UnitTest.Portal.Indices.cls?$NAMESPACE=IRISAPP
+
 ## ZPM Package Manager
 This module is zpm-packaged, which means that it is described with [module.xml](https://github.com/oliverwilms/iris-budget/blob/master/module.xml) and available in public repository and installable with:
 zpm "install iris-budget"
