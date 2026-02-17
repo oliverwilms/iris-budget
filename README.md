@@ -55,11 +55,17 @@ But you also can run the test script locally with:
 IRISAPP>set ^UnitTestRoot="/irisdev/app/tests"
 IRISAPP>do ##class(%UnitTest.Manager).RunTest(,"/nodelete")
 ```
+
 Or with ZPM:
 ```
 IRISAPP>zpm
 zpm:IRISAPP>load /irisdev/app
 zpm:IRISAPP>test demo-coffeemaker
+```
+
+I created a classMethod to run tests which I can remember:
+```
+IRISAPP>Do ##class(dc.iris.test).Run()
 ```
 
 ## ZPM Package Manager
