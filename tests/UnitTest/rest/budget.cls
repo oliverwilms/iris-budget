@@ -67,7 +67,7 @@ Method OnAfterOneTest(testname As %String) As %Status
   Quit $$$OK
 }
 
-Method SendRequest(pUseCase As %String = "", pIris As %String = "", pKill = 0, pStatusCode = "", pErrorCode = "", pExpect = "") As %Status
+Method SendRequest(pUseCase As %String = "", pIris As %String = "", pKill = 0, pStatusCode = "", pErrorCode = "", pExpect = "", pAuth = 1) As %Status
 {
 	If $Get(pKill) Kill ^TESTunit
 	Do ..DebugTEST("UnitTest.rest.budget - SendRequest")
@@ -77,7 +77,7 @@ Method SendRequest(pUseCase As %String = "", pIris As %String = "", pKill = 0, p
 	Do ..LogMessage(x)
 	Set dynObj = ..GetPayload(pUseCase)
 	Do ..LogMessage("Payload: "_dynObj.%ToJSON())
-	Set tSC = ..CallRESTapi(pIris,pUrl,.pResponseData,pType,dynObj)
+	Set tSC = ..CallRESTapi(pIris,pUrl,.pResponseData,pType,dynObj,pAuth)
 	zw pResponseData
 	;
 	Set tSC = pResponseData.Rewind()
@@ -100,6 +100,21 @@ Method SendRequest(pUseCase As %String = "", pIris As %String = "", pKill = 0, p
 		Set tResult = ""
 	}
 	Do $$$AssertEquals(tMatch, 1, "Expected Results: "_tResult)
+	Quit $$$OK
+}
+
+Method subTestDispatch(pAuth = 1)
+{
+	Set pExpect = "{"
+	Do ..LogMessage("Expected response: "_pExpect)
+	Set pError = 0
+	Set pIris = ..GetIris()
+	Set tRandom = $Random(2)  // 0, 1
+	Set p1 = "D"_tRandom
+	Set pKill = 1
+	Set pStatusCode = ""
+	Set pErrorCode = ""
+	Do ..SendRequest(p1, pIris, pKill, pStatusCode, pErrorCode, pExpect, pAuth)
 	Quit $$$OK
 }
 
@@ -132,19 +147,16 @@ Method TestCategorylist() As %Status
 	Quit $$$OK
 }
 
-Method TestDispatch() As %Status
+Method TestDispatchBasicAuth() As %Status
 {
-	Set pExpect = "{"
-	Do ..LogMessage("Expected response: "_pExpect)
-	Set pError = 0
-	Set pIris = ..GetIris()
-	Set tRandom = $Random(2)  // 0, 1
-	Set p1 = "D"_tRandom
-	Set pKill = 1
-	Set pStatusCode = ""
-	Set pErrorCode = ""
-	Do ..SendRequest(p1, pIris, pKill, pStatusCode, pErrorCode, pExpect)
-	Quit $$$OK
+	Set pAuth = 1
+	Quit ..subTestDispatch(pAuth)
+}
+
+Method TestDispatchNoAuth() As %Status
+{
+	Set pAuth = 0
+	Quit ..subTestDispatch(pAuth)
 }
 
 }
