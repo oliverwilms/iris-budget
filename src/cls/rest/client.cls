@@ -11,6 +11,7 @@ ClassMethod CallRESTapi(pIris As %String, pUrl As %String, ByRef pResponseData A
 	Do ..DebugTEST("pUrl = "_$Get(pUrl))
 	Do ..DebugTEST("pType = "_$Get(pType))
 	Do ..DebugTEST("pBody = "_$Get(pBody))
+	Do ..DebugTEST("pAuth = "_$Get(pAuth))
 	Set myUnitTest = $Get(^myUnitTests)
 	Set tErrorCount = 0
 	Set tParamIRIS = pIris
