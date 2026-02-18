@@ -132,6 +132,16 @@ Method Test0PostCategory() As %Status
 	Quit $$$OK
 }
 
+Method TestAuthenticateUser() As %Status
+{
+	Set pToken = "mytoken"
+	Do ..LogMessage("pToken: "_pToken)
+	Set tValid = ##class(rest.dispatch).AuthenticateUser(pToken)
+	Do $$$AssertStatusOK(tValid, "Call to AuthenticateUser()")
+	Quit $$$OK
+
+}
+
 Method TestCategorylist() As %Status
 {
 	Set pExpect = "{"
