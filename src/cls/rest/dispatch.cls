@@ -51,6 +51,9 @@ ClassMethod AuthenticateUser(pToken As %String) As %Integer
         Set ^TESTunit(0-debug,"pToken") = $Get(pToken)
     }
     Set success = $SYSTEM.Security.Login("_SYSTEM", "SYS")
+    If ..#DEBUG {
+        Set ^TESTunit(0-debug,"success") = $Get(success)
+    }
     Quit success
 }
 
