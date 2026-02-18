@@ -16,8 +16,42 @@ In this case it's the responsibility of the user to return a response.
         Set ^TESTunit(0-debug,"pUrl") = $Get(pUrl)
         Set ^TESTunit(0-debug,"pMethod") = $Get(pMethod)
     }
-    Set pContinue = 1
-    Quit $$$OK
+    Set tSC = $$$OK
+    // Example to retrieve API key from headers
+    Set apiKey = $Get(%request.CgiEnvs("HTTP_API_KEY"))
+    If ..#DEBUG {
+        Set ^TESTunit(0-debug,"apiKey") = $Get(apiKey)
+    }
+    Set token = $Get(%request.Data("token",1))
+    If ..#DEBUG {
+        Set ^TESTunit(0-debug,"token") = $Get(token)
+    }
+    Set tValid = 0
+    // Implement your custom authentication logic here
+    If $Data(token) {
+        Set tValid = ..AuthenticateUser(token)
+    }
+    If ..#DEBUG {
+        Set ^TESTunit(0-debug,"tValid") = $Get(tValid)
+    }
+    If tValid {
+        Set pContinue = 1
+    } Else {
+       Set %response.Status = "401 Unauthorized"
+       Set pContinue = $$$NO
+    }
+    Quit tSC
+}
+
+ClassMethod AuthenticateUser(pToken As %String) As %Integer
+{
+    If ..#DEBUG {
+        Set debug = $Increment(^TESTunit)
+        Set ^TESTunit(0-debug) = $ZDateTime($NOW(),8,1,3)_" : "_$JOB_" : rest.dispatch - AuthenticateUser"
+        Set ^TESTunit(0-debug,"pToken") = $Get(pToken)
+    }
+    Set success = $SYSTEM.Security.Login("_SYSTEM", "SYS")
+    Quit success
 }
 
 XData UrlMap
