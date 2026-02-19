@@ -59,7 +59,7 @@ ClassMethod AuthenticateUser(pToken As %String) As %Integer
     If ..#DEBUG {
         Set ^TESTunit(0-debug,"success") = $Get(success)
     }
-    Quit success
+    Quit $$$OK
 }
 
 XData UrlMap
