@@ -50,7 +50,11 @@ ClassMethod AuthenticateUser(pToken As %String) As %Integer
         Set ^TESTunit(0-debug) = $ZDateTime($NOW(),8,1,3)_" : "_$JOB_" : rest.dispatch - AuthenticateUser"
         Set ^TESTunit(0-debug,"pToken") = $Get(pToken)
     }
-    Set success = $SYSTEM.Security.Login("_SYSTEM", "SYS")
+    ;
+    // Line below requires Role with %Service_Login:Use
+    //Set success = $SYSTEM.Security.Login("_SYSTEM", "SYS")
+    ;
+    If '($e($roles,1,$l("%All"))="%All") { n $ET,$roles s $ET="",$roles=$roles_","_"%All" }
     If ..#DEBUG {
         Set ^TESTunit(0-debug,"success") = $Get(success)
     }
