@@ -24,28 +24,6 @@ zpm:USER>install "demo-coffeemaker"
 ```
 Run the appliction in URL: http://yourserver:52773/csp/coffee/index.html#/
 
-## Development
-### Prerequisites
-Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
-This repository is ready to code in VSCode with ObjectScript plugin.
-Install [VSCode](https://code.visualstudio.com/), [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) and [ObjectScript](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript) plugin and open the folder in VSCode.
-
-
-This is a template. So use template button in Github and create a new repository with copy of iris-fullstack-template.
-![template](https://user-images.githubusercontent.com/2781759/93434019-4142bc00-f8d0-11ea-9b09-0e64501dde53.gif)
-Clone your repository.
-Open the folder with VSCode.
-Build container as it is shown in the gif:
-![template-build](https://user-images.githubusercontent.com/2781759/93434498-ebbadf00-f8d0-11ea-992e-3197f007d3bf.gif)
-or open the terminal and run:
-```
-docker-compose up -d
-```
-Check if the app is running from the VSCode ObjectScript menu:
-![template-app1](https://user-images.githubusercontent.com/2781759/93438148-946b3d80-f8d5-11ea-8373-71383bf6395b.gif)
-
-All set. You good to start the development.
-
 ## Unit Testing
 This repository has [U]nit Tests](https://github.com/intersystems-community/iris-fullstack-template/blob/787acb10efae8847e3084db26c3e4211bd5a753a/tests/UnitTest/Demo/coffeemaker.cls).
 THere is a [Github Actions CI workflow](https://github.com/intersystems-community/iris-fullstack-template/blob/787acb10efae8847e3084db26c3e4211bd5a753a/.github/workflows/main.yml) in this repo, which performs unit testing with every push to Github repository and fails if tests fail.
@@ -74,5 +52,11 @@ Review UnitTest results in URL: http://yourserver:52773/csp/sys/%25UnitTest.Port
 This module is zpm-packaged, which means that it is described with [module.xml](https://github.com/oliverwilms/iris-budget/blob/master/module.xml) and available in public repository and installable with:
 zpm "install iris-budget"
 
-## Credits
-Demo is built using original [Coffee Maker application](https://github.com/intersystems/FirstLook-REST) by Michael Smart a and it's enhanced version by [Caret Dev](https://github.com/caretdev/CoffeeMaker).
+## Streamlit
+```
+docker compose up -d
+docker exec -it iris-budget-iris-1 bash
+irisowner@f71c77f15f28:~/irisbuild$ cd /irisdev/app/python/
+irisowner@f71c77f15f28:/irisdev/app/python$ pip install streamlit
+irisowner@f71c77f15f28:/irisdev/app/python$ streamlit run budget.py
+```
