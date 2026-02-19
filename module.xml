@@ -20,7 +20,7 @@
       <Resource Name="dc.iris.PKG"/>
       <Resource Name="rest.PKG"/>
       <CSPApplication CookiePath="/csp/budget/" DefaultTimeout="900" DispatchClass="budget.disp" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/csp/budget" UseSessionCookie="2"/>
-      <CSPApplication CookiePath="/csp/rest/" DefaultTimeout="900" DispatchClass="rest.dispatch" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="1" Url="/csp/rest" UseSessionCookie="2"/>
+      <CSPApplication CookiePath="/csp/rest/" DefaultTimeout="900" DispatchClass="rest.dispatch" MatchRoles=":%All" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="1" Url="/csp/rest" UseSessionCookie="2"/>
       <CSPApplication CookiePath="/rest/budget/" DefaultTimeout="900" DispatchClass="rest.budget.rest.Handler" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/rest/budget" Generated="true"/>
       <CSPApplication CookiePath="/rest/coffeemakerapp/" DefaultTimeout="900" DispatchClass="Demo.CoffeeMakerRESTServer" MatchRoles=":${dbrole}" PasswordAuthEnabled="1" Recurse="1" ServeFiles="1" ServeFilesTimeout="3600" UnauthenticatedEnabled="0" Url="/rest/coffeemakerapp" UseSessionCookie="2"/>
       <UnitTest Name="/tests" Package="UnitTest" Phase="test"/>
