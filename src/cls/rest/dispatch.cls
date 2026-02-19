@@ -54,7 +54,8 @@ ClassMethod AuthenticateUser(pToken As %String) As %Integer
     // Line below requires Role with %Service_Login:Use
     //Set success = $SYSTEM.Security.Login("_SYSTEM", "SYS")
     ;
-    If '($e($roles,1,$l("%All"))="%All") { n $ET,$roles s $ET="",$roles=$roles_","_"%All" }
+    // Line below caused <PROTECT>AuthenticateUser+10^rest.dispatch.1
+    //If '($e($roles,1,$l("%All"))="%All") { n $ET,$roles s $ET="",$roles=$roles_","_"%All" }
     If ..#DEBUG {
         Set ^TESTunit(0-debug,"success") = $Get(success)
     }
