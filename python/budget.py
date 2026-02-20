@@ -29,6 +29,9 @@ if st.button("Get Expenses"):
     else:
         st.error(f"API call failed: {api_response.status_code}")
 
+# Example of calling an endpoint (replace with real API base URL)
+POST_ENDPOINT = "http://localhost:52773/csp/rest/csp/budget/category"  # Replace with actual API URL
+
 # You can create input forms to call POST endpoints
 st.subheader("Add Category")
 with st.form("add_budget_form"):
@@ -37,7 +40,7 @@ with st.form("add_budget_form"):
     submitted = st.form_submit_button("Add Category")
     if submitted:
         payload = {"name": name, "amount": amount}
-        post_response = requests.post(API_ENDPOINT, json=payload)
+        post_response = requests.post(POST_ENDPOINT, json=payload)
         if post_response.status_code == 201:
             st.success("Budget added successfully!")
         else:
