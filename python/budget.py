@@ -41,7 +41,7 @@ with st.form("add_budget_form"):
     if submitted:
         payload = {"name": name, "amount": amount}
         post_response = requests.post(POST_ENDPOINT, json=payload)
-        if post_response.status_code == 201:
-            st.success("Budget added successfully!")
+        if post_response.status_code == 200:
+            st.success("Category added successfully!")
         else:
             st.error(f"POST call failed: {post_response.status_code}")
