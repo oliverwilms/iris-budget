@@ -52,7 +52,7 @@ Review UnitTest results in URL: http://yourserver:52773/csp/sys/%25UnitTest.Port
 This module is zpm-packaged, which means that it is described with [module.xml](https://github.com/oliverwilms/iris-budget/blob/master/module.xml) and available in public repository and installable with:
 zpm "install iris-budget"
 
-## Streamlit
+## View Streamlit app in browser
 ```
 docker compose up -d
 docker exec -it iris-budget-iris-1 bash
@@ -60,3 +60,4 @@ irisowner@f71c77f15f28:~/irisbuild$ cd /irisdev/app/python/
 irisowner@f71c77f15f28:/irisdev/app/python$ pip install streamlit
 irisowner@f71c77f15f28:/irisdev/app/python$ streamlit run budget.py
 ```
+View the Streamlit appliction in browser at http://yourserver:8501
