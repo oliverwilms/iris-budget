@@ -35,11 +35,13 @@ POST_ENDPOINT = "http://localhost:52773/csp/rest/csp/budget/category"  # Replace
 # You can create input forms to call POST endpoints
 st.subheader("Add Category")
 with st.form("add_budget_form"):
+    options = ["Income", "Expense"]
+    type = st.radio("Category Type:", options, index=0)
     name = st.text_input("Category Name")
     amount = st.number_input("Amount", min_value=0.0)
     submitted = st.form_submit_button("Add Category")
     if submitted:
-        payload = {"name": name, "amount": amount}
+        payload = {"type": type, "name": name, "amount": amount}
         post_response = requests.post(POST_ENDPOINT, json=payload)
         if post_response.status_code == 200:
             st.success("Category added successfully!")
