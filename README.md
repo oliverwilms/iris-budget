@@ -10,6 +10,7 @@ It demoes how to package the application in ZPM module and how to deploy it usin
 I need a table of categories to create a budget for my personal finance.
 
 I chose to use Streamlit for my frontend application to communicate with InterSystes IRIS.
+<img width="1411" alt="Screenshot" src="https://github.com/oliverwilms/bilder/blob/main/Screenshot_Budget_AddCategory.png">
 
 ## Installation
 ### Docker way
