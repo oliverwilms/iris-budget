@@ -48,6 +48,8 @@ ClassMethod categoryCreate(categoryInfo As %Stream.Object) As %Stream.Object
         Set ^TESTunit(0-debug,"dao") = dao.%ToJSON()
         Set pType = dao."IncomeOrExpense"
         Set pName = dao."Name"
+        If ("" = $Get(pType)) Set pType = dao.type
+        If ("" = $Get(pName)) Set pName = dao.name
         Set tSC = ##class(dc.iris.category).CreateOrUpdate(pType,pName)
         Set tHttpStatusCode = 200
         Set ^TESTunit(0-debug,"tSC") = "OK"
