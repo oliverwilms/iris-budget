@@ -2,12 +2,14 @@
  [![Quality Gate Status](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Firis-fullstack-template&metric=alert_status)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Firis-fullstack-template)
  [![Reliability Rating](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Firis-fullstack-template&metric=reliability_rating)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Firis-fullstack-template)
 # InterSystems IRIS Full Stack Budget App
-This repository contains a sample application which consists of InterSystems IRIS REST API and Frontend Application which demoes a coffee-maker shop.
-
-It demonstrates the way to communicate with InterSystes IRIS from any frontend application.
+This app was developed using iris-fullstack-template. It consists of InterSystems IRIS REST API and Frontend Application. 
 It has Unit tests which could be run interactively, or using ZPM, or via Github CI.
 It demoes the way to develop using Docker containers.
 It demoes how to package the application in ZPM module and how to deploy it using ZPM.
+
+I need a table of categories to create a budget for my personal finance.
+
+I chose to use Streamlit for my frontend application to communicate with InterSystes IRIS.
 
 ## Installation
 ### Docker way
