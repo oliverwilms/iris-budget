@@ -19,6 +19,7 @@ ClassMethod setupCategories() As %Status
     If $$$ISOK(tSC) Set tSC = ##class(dc.iris.category).CreateOrUpdate("Expense","Vacation")
     If $$$ISOK(tSC) Set tSC = ##class(dc.iris.category).CreateOrUpdate("Expense","Leisure")
     If $$$ISOK(tSC) Set tSC = ##class(dc.iris.category).CreateOrUpdate("Expense","Other Expense")
+    Quit tSC
 }
 
 }
