@@ -16,4 +16,6 @@
     // load all the code of the project as a ZPM package
     zn "IRISAPP"
     zpm "load /home/irisowner/irisbuild/ -v":1:1
+
+    Do ##class(dc.iris.budget).setupCategories()
     halt
