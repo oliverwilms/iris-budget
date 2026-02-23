@@ -1,6 +1,7 @@
 # Python
 import streamlit as st
 import requests
+import json
 
 # Base URL of the API
 BASE_URL = "https://raw.githubusercontent.com/oliverwilms/iris-budget/master/swagger/budget.json"
@@ -29,15 +30,26 @@ if api_response.status_code == 200:
 else:
     st.error(f"API call failed: {api_response.status_code}")
 
+# Parse JSON safely
+try:
+    data = json.loads(expenses)
+    category_list = data.get("categorylist", [])
+    if not isinstance(category_list, list) or not all(isinstance(item, str) for item in category_list):
+        st.error("Invalid categorylist format. Must be an array of strings.")
+        st.stop()
+except json.JSONDecodeError:
+    st.error("Invalid JSON format.")
+    st.stop()
+
 st.subheader("Dynamic Streamlit Form Example")
 
 # Create a form
 with st.form("dynamic_form"):
     form_data = {}
-    
-    # Loop through field definitions and create inputs dynamically
-    for field in expenses.categorylist:
-        form_data[field] = st.number_input(field, min_value=0, step=1)
+    # Loop through category list and create inputs dynamically
+    for category in category_list:
+        # Create a number input for each category
+        form_data[category] = st.number_input(category, min_value=0, step=1)
 
     # Submit button
     submitted = st.form_submit_button("Submit")
