@@ -30,16 +30,12 @@ if api_response.status_code == 200:
 else:
     st.error(f"API call failed: {api_response.status_code}")
 
-# Parse JSON safely
-try:
-    data = json.loads(api_response)
-    category_list = data.get("categorylist", [])
-    if not isinstance(category_list, list) or not all(isinstance(item, str) for item in category_list):
-        st.error("Invalid categorylist format. Must be an array of strings.")
-        st.stop()
-except json.JSONDecodeError:
-    st.error("Invalid JSON format.")
+# Validate that categorylist exists and is a list of strings
+if not isinstance(expenses.get("categorylist"), list) or not all(isinstance(item, str) for item in expenses["categorylist"]):
+    st.error("'categorylist' must be an array of strings.")
     st.stop()
+
+category_list = expenses["categorylist"]
 
 st.subheader("Dynamic Streamlit Form Example")
 
