@@ -32,7 +32,7 @@ else:
 
 # Parse JSON safely
 try:
-    data = json.loads(expenses)
+    data = json.loads(api_response)
     category_list = data.get("categorylist", [])
     if not isinstance(category_list, list) or not all(isinstance(item, str) for item in category_list):
         st.error("Invalid categorylist format. Must be an array of strings.")
