@@ -21,13 +21,32 @@ API_ENDPOINT = "http://localhost:52773/csp/rest/csp/budget/categorylist/Expense"
 
 st.subheader("Fetch Expenses")
 
-if st.button("Get Expenses"):
-    api_response = requests.get(API_ENDPOINT)
-    if api_response.status_code == 200:
-        expenses = api_response.json()
-        st.write(expenses)
-    else:
-        st.error(f"API call failed: {api_response.status_code}")
+# if st.button("Get Expenses"):
+api_response = requests.get(API_ENDPOINT)
+if api_response.status_code == 200:
+    expenses = api_response.json()
+    st.write(expenses)
+else:
+    st.error(f"API call failed: {api_response.status_code}")
+
+st.subheader("Dynamic Streamlit Form Example")
+
+# Create a form
+with st.form("dynamic_form"):
+    form_data = {}
+    
+    # Loop through field definitions and create inputs dynamically
+    for field in expenses.categorylist:
+        form_data[field] = st.number_input(field, min_value=0, step=1)
+
+    # Submit button
+    submitted = st.form_submit_button("Submit")
+
+# Handle form submission
+if submitted:
+    st.success("Form submitted successfully!")
+    st.json(form_data)
+
 
 # Example of calling an endpoint (replace with real API base URL)
 POST_ENDPOINT = "http://localhost:52773/csp/rest/csp/budget/category"  # Replace with actual API URL
