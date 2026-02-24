@@ -20,6 +20,59 @@ else:
 # URLs for calling bedget categorylists endpoints 
 API_ENDPOINT1 = "http://localhost:52773/csp/rest/csp/budget/categorylist/Income"
 API_ENDPOINT2 = "http://localhost:52773/csp/rest/csp/budget/categorylist/Expense"
+SUBMIT_API = "https://example.com/api/finance/submit"  # POST endpoint
+
+# Fetch categories from APIs
+def get_categories(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()  # Expecting a list of category names
+    except Exception as e:
+        st.error(f"Error fetching categories: {e}")
+        return []
+
+expense_categories = get_categories(API_ENDPOINT2)
+income_categories = get_categories(API_ENDPOINT1)
+
+st.subheader("💰 Expense & Income Entry Form")
+
+with st.form("budget_form"):
+    col1, col2 = st.columns(2)
+
+    expense_data = {}
+    income_data = {}
+
+    with col1:
+        st.subheader("Income")
+        for cat in income_categories:
+            income_data[cat] = st.number_input(
+                f"{cat} (Income)", min_value=0.0, step=0.01, format="%.2f"
+            )
+
+    with col2:
+        st.subheader("Expenses")
+        for cat in expense_categories:
+            expense_data[cat] = st.number_input(
+                f"{cat} (Expense)", min_value=0.0, step=0.01, format="%.2f"
+            )
+
+    submitted = st.form_submit_button("Submit")
+
+if submitted:
+    payload = {
+        "expenses": expense_data,
+        "income": income_data
+    }
+
+    try:
+        res = requests.post(SUBMIT_API, json=payload)
+        res.raise_for_status()
+        st.success("✅ Data submitted successfully!")
+        st.json(res.json())  # Show API response
+    except requests.exceptions.RequestException as e:
+        st.error(f"❌ Failed to submit data: {e}")
+
 
 # Create two columns
 colIncome, colExpense = st.columns(2)
