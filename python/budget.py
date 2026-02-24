@@ -57,7 +57,7 @@ with colIncome:
 with colExpense:
     st.subheader("Expense")
     # if st.button("Get Expenses"):
-    api_response1 = requests.get(API_ENDPOINT1)
+    api_response1 = requests.get(API_ENDPOINT2)
     if api_response1.status_code == 200:
         expenses = api_response1.json()
         #st.write(expenses)
