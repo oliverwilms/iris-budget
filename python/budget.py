@@ -40,7 +40,7 @@ with colIncome:
         st.stop()
     category_list = expenses["categorylist"]
     # Create a form
-    with st.form("dynamic_form"):
+    with st.form("income_form"):
         form_data = {}
         # Loop through category list and create inputs dynamically
         for category in category_list:
@@ -69,7 +69,7 @@ with colExpense:
         st.stop()
     category_list = expenses["categorylist"]
     # Create a form
-    with st.form("dynamic_form"):
+    with st.form("expense_form"):
         form_data = {}
         # Loop through category list and create inputs dynamically
         for category in category_list:
