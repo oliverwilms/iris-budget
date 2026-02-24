@@ -34,6 +34,8 @@ def get_categories(url):
 
 expense_categories = get_categories(API_ENDPOINT2)
 income_categories = get_categories(API_ENDPOINT1)
+expense_list = expense_categories["categorylist"]
+income_list = income_categories["categorylist"]
 
 st.subheader("💰 Expense & Income Entry Form")
 
@@ -45,14 +47,14 @@ with st.form("budget_form"):
 
     with col1:
         st.subheader("Income")
-        for cat in income_categories:
+        for cat in income_list:
             income_data[cat] = st.number_input(
                 f"{cat} (Income)", min_value=0.0, step=0.01, format="%.2f"
             )
 
     with col2:
         st.subheader("Expenses")
-        for cat in expense_categories:
+        for cat in expense_list:
             expense_data[cat] = st.number_input(
                 f"{cat} (Expense)", min_value=0.0, step=0.01, format="%.2f"
             )
