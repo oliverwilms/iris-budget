@@ -9,7 +9,7 @@ BASE_URL = "https://raw.githubusercontent.com/oliverwilms/iris-budget/master/swa
 st.title("Budget API Explorer")
 
 # Example: Fetching Swagger JSON
-st.subheader("Swagger JSON")
+# st.subheader("Swagger JSON")
 response = requests.get(BASE_URL)
 if response.status_code == 200:
     swagger_data = response.json()
