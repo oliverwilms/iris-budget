@@ -75,68 +75,6 @@ if submitted:
     except requests.exceptions.RequestException as e:
         st.error(f"❌ Failed to submit data: {e}")
 
-
-# Create two columns
-colIncome, colExpense = st.columns(2)
-
-# Add content to the first column
-with colIncome:
-    st.subheader("Income")
-    # if st.button("Get Incomes"):
-    api_response1 = requests.get(API_ENDPOINT1)
-    if api_response1.status_code == 200:
-        expenses = api_response1.json()
-        #st.write(expenses)
-    else:
-        st.error(f"API call failed: {api_response1.status_code}")
-    # Validate that categorylist exists and is a list of strings
-    if not isinstance(expenses.get("categorylist"), list) or not all(isinstance(item, str) for item in expenses["categorylist"]):
-        st.error("'categorylist' must be an array of strings.")
-        st.stop()
-    category_list = expenses["categorylist"]
-    # Create a form
-    with st.form("income_form"):
-        form_data = {}
-        # Loop through category list and create inputs dynamically
-        for category in category_list:
-            # Create a number input for each category
-            form_data[category] = st.number_input(category, min_value=0, step=1)
-        # Submit button
-        submitted = st.form_submit_button("Submit")
-    # Handle form submission
-    if submitted:
-        st.success("Form submitted successfully!")
-        st.json(form_data)
-
-# Add content to the second column
-with colExpense:
-    st.subheader("Expense")
-    # if st.button("Get Expenses"):
-    api_response1 = requests.get(API_ENDPOINT2)
-    if api_response1.status_code == 200:
-        expenses = api_response1.json()
-        #st.write(expenses)
-    else:
-        st.error(f"API call failed: {api_response1.status_code}")
-    # Validate that categorylist exists and is a list of strings
-    if not isinstance(expenses.get("categorylist"), list) or not all(isinstance(item, str) for item in expenses["categorylist"]):
-        st.error("'categorylist' must be an array of strings.")
-        st.stop()
-    category_list = expenses["categorylist"]
-    # Create a form
-    with st.form("expense_form"):
-        form_data = {}
-        # Loop through category list and create inputs dynamically
-        for category in category_list:
-            # Create a number input for each category
-            form_data[category] = st.number_input(category, min_value=0, step=1)
-        # Submit button
-        submitted = st.form_submit_button("Submit")
-    # Handle form submission
-    if submitted:
-        st.success("Form submitted successfully!")
-        st.json(form_data)
-
 # Example of calling an endpoint (replace with real API base URL)
 POST_ENDPOINT = "http://localhost:52773/csp/rest/csp/budget/category"  # Replace with actual API URL
 
