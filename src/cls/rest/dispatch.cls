@@ -66,6 +66,7 @@ XData UrlMap
 {
 <Routes>
     <Map Prefix="/csp/budget" Forward="budget.disp"/>
+    <Route Url="/newbudget" Method="POST" Call="NewBudget" />
   </Routes>
 }
 
