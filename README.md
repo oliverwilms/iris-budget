@@ -19,7 +19,7 @@ Clone the repo, run:
 ```
 docker-compose up -d
 ```
-Run the application with URL: http://localhost:52773/csp/IRISAPP/index.html#/
+
 ### ZPM way
 Open IRIS terminal and run ZPM:
 ```
