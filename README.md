@@ -63,4 +63,4 @@ irisowner@f71c77f15f28:~/irisbuild$ cd /irisdev/app/python/
 irisowner@f71c77f15f28:/irisdev/app/python$ pip install streamlit
 irisowner@f71c77f15f28:/irisdev/app/python$ streamlit run budget.py
 ```
-View the Streamlit appliction in browser at http://yourserver:8501
+View the Streamlit application in browser at http://yourserver:8501
