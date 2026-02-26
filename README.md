@@ -26,7 +26,6 @@ Open IRIS terminal and run ZPM:
 USER>zpm
 zpm:USER>install "demo-coffeemaker"
 ```
-Run the appliction in URL: http://yourserver:52773/csp/coffee/index.html#/
 
 ## Unit Testing
 This repository has [U]nit Tests](https://github.com/intersystems-community/iris-fullstack-template/blob/787acb10efae8847e3084db26c3e4211bd5a753a/tests/UnitTest/Demo/coffeemaker.cls).
