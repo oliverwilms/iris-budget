@@ -17,6 +17,8 @@ ARG TESTS=0
 ARG MODULE="iris-budget"
 ARG NAMESPACE="IRISAPP"
 
+RUN pip install streamlit
+
 RUN --mount=type=bind,src=.,dst=. \
     iris start IRIS && \
 	iris session IRIS < iris.script && \
